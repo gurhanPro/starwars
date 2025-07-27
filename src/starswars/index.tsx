@@ -4,6 +4,7 @@ import Search from './components/Search/Search'
 import Character from './components/Character/Character'
 import useDebounce from './hooks/useDebounce'
 import useCharacterSearch from './hooks/useCharacterSearch'
+import posthog from '../lib/posthog'
 
 function StarWars() {
 
@@ -12,6 +13,7 @@ function StarWars() {
 
   const debouncedSearchTerm = useDebounce(searchTerm, DEBOUNCE_TIME_IN_MS)
   
+  // Only search if term is long enough
   const shouldSearch = debouncedSearchTerm && debouncedSearchTerm.length > SEARCHABLE_CHARACTER_LENGTH
   const searchQuery = shouldSearch ? debouncedSearchTerm : ''
   
@@ -26,6 +28,11 @@ function StarWars() {
     event.preventDefault()
     setSelectedCharacter(character)
     setSearchTerm('')
+    
+    posthog.capture('character_selected', {
+      character_name: character.name,
+      search_term: searchTerm,
+    })
   }
 
   return (
