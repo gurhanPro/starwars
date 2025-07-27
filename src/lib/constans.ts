@@ -1,2 +1,2 @@
 export const SEARCHABLE_CHARACTER_LENGTH = 2;
-export const DEBOUNCE_TIME_IN_MS = 4000;
+export const DEBOUNCE_TIME_IN_MS = 500;
