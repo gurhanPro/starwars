@@ -4,9 +4,8 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import React from 'react'
 import useCharacterSearch from '../useCharacterSearch'
 
-// Mock fetch
 const mockFetch = vi.fn()
-global.fetch = mockFetch
+globalThis.fetch = mockFetch
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
@@ -131,9 +130,8 @@ describe('useCharacterSearch', () => {
 
   it('should use correct query key for caching', () => {
     const wrapper = createWrapper()
-    const { result } = renderHook(() => useCharacterSearch('Vader'), { wrapper })
+    renderHook(() => useCharacterSearch('Vader'), { wrapper })
 
-    // The query key should include the search term for proper caching
     expect(mockFetch).toHaveBeenCalledWith('https://swapi.dev/api/people/?search=Vader')
   })
 })
