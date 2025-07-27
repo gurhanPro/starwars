@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import { SEARCHABLE_CHARACTER_LENGTH } from './lib/constans'
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
   }
 
   useEffect(() => {
-    if (searchTerm) {
+    if (searchTerm && searchTerm.length > SEARCHABLE_CHARACTER_LENGTH) {
       fetchCharacters()
     }
   }, [searchTerm])
@@ -49,16 +50,16 @@ function App() {
       />
       {loading && <p>Loading...</p>}
       {!loading && characters.length === 0 && !error && <p>No characters found.</p>}
-      {!loading && characters.length > 0 && (
-        <p>Found {characters.length} character(s).</p>
-      )}
       {error && <p className="error">{error}</p>}
-      {!loading && !error && characters.length > 0 && (
+      {!loading && !error && characters.length > 0 && searchTerm.length > SEARCHABLE_CHARACTER_LENGTH && (
+       <> 
+       <p>Found {characters.length} character(s).</p>
         <ul>
           {characters.map((character) => (
             <li key={character.name}>{character.name}</li>
           ))}
         </ul>
+        </>
       )}
     </div>
   )

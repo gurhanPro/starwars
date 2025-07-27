@@ -1,0 +1,1 @@
+export const SEARCHABLE_CHARACTER_LENGTH = 2;
