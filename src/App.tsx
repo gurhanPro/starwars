@@ -1,9 +1,24 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 
 function App() {
 
-  const [searchTerm, setSearchTerm] = useState('')  
+  const [searchTerm, setSearchTerm] = useState('') 
+  const [characters, setCharacters] = useState([])
+  
+  const fetchCharacters = async () => {
+      const response = await fetch('https://swapi.dev/api/people/?search=' + searchTerm)
+      const data = await response.json()
+      setCharacters(data.results)
+  }
+
+  useEffect(() => {
+    if (searchTerm) {
+      fetchCharacters()
+    }
+  }, [searchTerm])
+
+  console.log(characters)
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
