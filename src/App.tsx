@@ -8,6 +8,7 @@ function App() {
   const [characters, setCharacters] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string | null>(null)
+  const [selectedCharacter, setSelectedCharacter] = useState<any | null>(null)
 
   const fetchCharacters = async () => {
       if (!searchTerm) {
@@ -33,11 +34,14 @@ function App() {
     }
   }, [searchTerm])
 
-  console.log(characters)
-
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
-    console.log(event.target.value)
+    setSelectedCharacter(null)
+  }
+
+  const handleSelectCharacter = (event: React.MouseEvent<HTMLLIElement>, character: any) => {
+    event.preventDefault()
+    setSelectedCharacter(character)
   }
 
   return (
@@ -56,11 +60,28 @@ function App() {
        <p>Found {characters.length} character(s).</p>
         <ul>
           {characters.map((character) => (
-            <li key={character.name}>{character.name}</li>
+            <li key={character.name} onClick={(event) => handleSelectCharacter(event, character)}>{character.name}</li>
           ))}
         </ul>
         </>
       )}
+      <div>
+        {
+          selectedCharacter && (
+            <div>
+              <h2>{selectedCharacter.name}</h2>
+              <p>Height: {selectedCharacter.height}</p>
+              <p>Mass: {selectedCharacter.mass}</p>
+              <p>Hair Color: {selectedCharacter.hair_color}</p>
+              <p>Skin Color: {selectedCharacter.skin_color}</p>
+              <p>Eye Color: {selectedCharacter.eye_color}</p>
+              <p>Birth Year: {selectedCharacter.birth_year}</p>
+              <p>Gender: {selectedCharacter.gender}</p>
+            </div>
+          )
+
+        }
+      </div>
     </div>
   )
 }
