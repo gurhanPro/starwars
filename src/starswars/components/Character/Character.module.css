@@ -1,0 +1,59 @@
+.characterCard {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e1e5e9;
+}
+
+.characterName {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 20px 0;
+  text-align: center;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 12px;
+}
+
+.characterDetails {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.characterCard p {
+  margin: 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 2px dashed #dee2e6;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  .characterDetails {
+    grid-template-columns: 1fr;
+  }
+  
+  .characterCard {
+    margin: 20px 16px;
+    padding: 20px;
+  }
+  
+  .characterName {
+    font-size: 24px;
+  }
+}
