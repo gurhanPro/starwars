@@ -14,11 +14,9 @@ const mockCharacter = {
 }
 
 describe('Character', () => {
-  it('displays placeholder when no character is selected', () => {
+  it('displays null when no character is selected', () => {
     render(<Character selectedCharacter={null} />)
-    
-    expect(screen.getByTestId('character-placeholder')).toBeInTheDocument()
-    expect(screen.getByText('Select a character to see details')).toBeInTheDocument()
+    expect(screen.queryByTestId('character-card')).not.toBeInTheDocument()
   })
 
   it('does not display character card when no character is selected', () => {
@@ -52,13 +50,6 @@ describe('Character', () => {
     expect(screen.getByTestId('character-eye-color')).toHaveTextContent('Eye Color: blue')
     expect(screen.getByTestId('character-birth-year')).toHaveTextContent('Birth Year: 19BBY')
     expect(screen.getByTestId('character-gender')).toHaveTextContent('Gender: male')
-  })
-
-  it('does not display placeholder when character is selected', () => {
-    render(<Character selectedCharacter={mockCharacter} />)
-    
-    expect(screen.queryByTestId('character-placeholder')).not.toBeInTheDocument()
-    expect(screen.queryByText('Select a character to see details')).not.toBeInTheDocument()
   })
 
   it('handles character with different properties', () => {

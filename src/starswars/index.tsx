@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
-import { SEARCHABLE_CHARACTER_LENGTH } from '../lib/constans'
+import { SEARCHABLE_CHARACTER_LENGTH, DEBOUNCE_TIME_IN_MS } from '../lib/constans'
 import Search from './components/Search/Search'
 import Character from './components/Character/Character'
+import useDebounce from './hooks/useDebounce'
 
 function StarWars() {
 
@@ -11,15 +12,17 @@ function StarWars() {
   const [error, setError] = useState<string | null>(null)
   const [selectedCharacter, setSelectedCharacter] = useState<any | null>(null)
 
-  const fetchCharacters = async () => {
-      if (!searchTerm) {
+  const debouncedSearchTerm = useDebounce(searchTerm, DEBOUNCE_TIME_IN_MS)
+
+  const fetchCharacters = async (searchQuery: string) => {
+      if (!searchQuery) {
         setCharacters([])
         return
       }
       setError(null)
       try {
         setLoading(true)
-        const response = await fetch('https://swapi.dev/api/people/?search=' + searchTerm)
+        const response = await fetch('https://swapi.dev/api/people/?search=' + searchQuery)
         const data = await response.json()
         setCharacters(data.results)
       } catch (error) {
@@ -30,10 +33,12 @@ function StarWars() {
   }
 
   useEffect(() => {
-    if (searchTerm && searchTerm.length > SEARCHABLE_CHARACTER_LENGTH) {
-      fetchCharacters()
+    if (debouncedSearchTerm && debouncedSearchTerm.length > SEARCHABLE_CHARACTER_LENGTH) {
+      fetchCharacters(debouncedSearchTerm)
+    } else if (!debouncedSearchTerm) {
+      setCharacters([])
     }
-  }, [searchTerm])
+  }, [debouncedSearchTerm])
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)

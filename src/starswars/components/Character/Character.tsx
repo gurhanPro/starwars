@@ -20,11 +20,7 @@ const Character: React.FC<CharacterProps> = ({
   selectedCharacter
 }) => {
   if (!selectedCharacter) {
-    return (
-      <div className={styles.placeholder} data-testid="character-placeholder">
-        Select a character to see details
-      </div>
-    )
+    return null
   }
 
   return (
