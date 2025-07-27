@@ -21,23 +21,23 @@ const Character: React.FC<CharacterProps> = ({
 }) => {
   if (!selectedCharacter) {
     return (
-      <div className={styles.placeholder}>
+      <div className={styles.placeholder} data-testid="character-placeholder">
         Select a character to see details
       </div>
     )
   }
 
   return (
-    <div className={styles.characterCard}>
-      <h2 className={styles.characterName}>{selectedCharacter.name}</h2>
-      <div className={styles.characterDetails}>
-        <p>Height: {selectedCharacter.height}</p>
-        <p>Mass: {selectedCharacter.mass}</p>
-        <p>Hair Color: {selectedCharacter.hair_color}</p>
-        <p>Skin Color: {selectedCharacter.skin_color}</p>
-        <p>Eye Color: {selectedCharacter.eye_color}</p>
-        <p>Birth Year: {selectedCharacter.birth_year}</p>
-        <p>Gender: {selectedCharacter.gender}</p>
+    <div className={styles.characterCard} data-testid="character-card">
+      <h2 className={styles.characterName} data-testid="character-name">{selectedCharacter.name}</h2>
+      <div className={styles.characterDetails} data-testid="character-details">
+        <p data-testid="character-height">Height: {selectedCharacter.height}</p>
+        <p data-testid="character-mass">Mass: {selectedCharacter.mass}</p>
+        <p data-testid="character-hair-color">Hair Color: {selectedCharacter.hair_color}</p>
+        <p data-testid="character-skin-color">Skin Color: {selectedCharacter.skin_color}</p>
+        <p data-testid="character-eye-color">Eye Color: {selectedCharacter.eye_color}</p>
+        <p data-testid="character-birth-year">Birth Year: {selectedCharacter.birth_year}</p>
+        <p data-testid="character-gender">Gender: {selectedCharacter.gender}</p>
       </div>
     </div>
   )
