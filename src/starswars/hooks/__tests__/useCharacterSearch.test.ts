@@ -82,7 +82,7 @@ describe('useCharacterSearch', () => {
 
     await waitFor(() => {
       expect(result.current.isError).toBe(true)
-    })
+    }, { timeout: 10000 })
 
     expect(result.current.error).toBeInstanceOf(Error)
     expect(result.current.data).toBeUndefined()
@@ -99,7 +99,7 @@ describe('useCharacterSearch', () => {
 
     await waitFor(() => {
       expect(result.current.isError).toBe(true)
-    })
+    }, { timeout: 10000 })
 
     expect(result.current.error).toBeInstanceOf(Error)
     expect((result.current.error as Error).message).toBe('Failed to fetch characters')

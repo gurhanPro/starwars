@@ -40,6 +40,8 @@ export const useCharacterSearch = (searchTerm: string) => {
     enabled: !!searchTerm,
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
+    retry: 3,
+    retryDelay: (attemptIndex) => Math.min(500 * 2 ** attemptIndex, 10000), // double the delay each retry, max 10 seconds
   })
 }
 
