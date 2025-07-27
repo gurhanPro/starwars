@@ -41,7 +41,11 @@ export const useCharacterSearch = (searchTerm: string) => {
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
     retry: 3,
-    retryDelay: (attemptIndex) => Math.min(500 * 2 ** attemptIndex, 10000), // double the delay each retry, max 10 seconds
+    retryDelay: (attemptIndex) => {
+      const baseDelay = 500 * 2 ** attemptIndex
+      const jitter = Math.random() * 0.1 * baseDelay // 10% jitter
+      return Math.min(baseDelay + jitter, 10000)
+    },
   })
 }
 
