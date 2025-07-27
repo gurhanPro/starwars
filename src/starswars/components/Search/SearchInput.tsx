@@ -19,6 +19,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
       placeholder={placeholder}
       onChange={onSearchChange}
       className={styles.searchInput}
+      data-testid="search-input"
     />
   )
 }

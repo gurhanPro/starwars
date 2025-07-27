@@ -31,39 +31,40 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 }) => {
   if (loading) {
     return (
-      <div className={styles.searchResults}>
-        <div className={styles.loading}>Loading...</div>
+      <div className={styles.searchResults} data-testid="search-results">
+        <div className={styles.loading} data-testid="loading-message">Loading...</div>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className={styles.searchResults}>
-        <div className={styles.error}>{error}</div>
+      <div className={styles.searchResults} data-testid="search-results">
+        <div className={styles.error} data-testid="error-message">{error}</div>
       </div>
     )
   }
 
   if (!loading && characters.length === 0 && !error && searchTerm.length > searchableLength) {
     return (
-      <div className={styles.searchResults}>
-        <div className={styles.message}>No characters found.</div>
+      <div className={styles.searchResults} data-testid="search-results">
+        <div className={styles.message} data-testid="no-results-message">No characters found.</div>
       </div>
     )
   }
 
   if (!loading && !error && characters.length > 0 && searchTerm.length > searchableLength) {
     return (
-      <div className={styles.searchResults}>
-        <ul className={styles.resultsList}>
-          <li className={styles.resultsCount}>
+      <div className={styles.searchResults} data-testid="search-results">
+        <ul className={styles.resultsList} data-testid="results-list">
+          <li className={styles.resultsCount} data-testid="results-count">
             Found {characters.length} character(s).
           </li>
           {characters.map((character) => (
             <li 
               key={character.name} 
               className={styles.resultItem}
+              data-testid={`character-item-${character.name}`}
               onClick={(event) => onSelectCharacter(event, character)}
             >
               {character.name}

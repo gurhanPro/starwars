@@ -36,7 +36,7 @@ const Search: React.FC<SearchProps> = ({
   placeholder = "Search characters..."
 }) => {
   return (
-    <div className={styles.searchContainer}>
+    <div className={styles.searchContainer} data-testid="search-container">
       <SearchInput 
         searchTerm={searchTerm}
         onSearchChange={onSearchChange}
