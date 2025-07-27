@@ -1,6 +1,7 @@
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import StarWars from './starswars'
+import ErrorBoundary from './components/ErrorBoundary'
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,7 +17,9 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <StarWars />
+      <ErrorBoundary>
+        <StarWars />
+      </ErrorBoundary>
     </QueryClientProvider>
   )
 }
